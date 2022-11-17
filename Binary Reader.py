@@ -21,9 +21,10 @@ from Registers import registers
 class binary_reader:
     def __init__(self):
         self.opcode = ""
-        self.num1 = ""
-        self.num2 = ""
-        self.constant = ""
+        self.num1_reg = ""
+        self.num2_reg = ""
+        self.destination_reg = ""
+        self.bit_shift = ""
         self.func = ""
         self.apu = apu()
         self.register = registers()
@@ -35,19 +36,21 @@ class binary_reader:
             return
         else:
             self.opcode = seq[:6]
-            self.num1 = seq[6:11]
-            self.num2 = seq[11:16]
-            self.constant = seq[16:26]
+            self.num1_reg = seq[6:11]
+            self.num2_reg = seq[11:16]
+            self.destination_reg = seq[16:21]
+            self.bit_shift = seq[21:26]
             self.func = seq[26:31]
 
+        # Arithmetic operations
         if self.opcode == "000001":
-            return self.apu.add(int(self.num1), int(self.num2))
+            return self.apu.add(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
         elif self.opcode == "000010":
-            return self.apu.add(int(self.num1), int(self.num2))
+            return self.apu.subtract(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
         elif self.opcode == "000011":
-            return self.apu.add(int(self.num1), int(self.num2))
+            return self.apu.multiply(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
         elif self.opcode == "000100":
-            return self.apu.add(int(self.num1), int(self.num2))
+            return self.apu.divide(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
         else:
             print("Invalid input")
-        return
+            return
