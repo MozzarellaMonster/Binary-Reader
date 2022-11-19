@@ -1,6 +1,6 @@
 # Class that acts as the Arithmetic Processing Unit of the CPU
 
-class apu:
+class alu:
     def add(num1, num2):
         result = int(num1) + int(num2)
         return result
