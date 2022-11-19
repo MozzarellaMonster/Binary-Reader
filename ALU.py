@@ -1,4 +1,4 @@
-# Class that acts as the Arithmetic Processing Unit of the CPU
+# Class that acts as the Arithmetic Logic Unit of the CPU
 
 class alu:
     def add(num1, num2):
