@@ -3,13 +3,16 @@
 from APU import apu
 from Registers import registers
 
-# |---------------------|
-# |   FUNCTION CODES    |
-# | 001100 - ARITHMETIC |
-# |---------------------|
+# OPCODES and FUNCTION CODES are loosely based on MIPS R-type
 
 # |---------------------|
 # |       OPCODES       |
+# | 000000 - ARITHMETIC |
+# | 000011 ------ OTHER |
+# |---------------------|
+
+# |---------------------|
+# |    FUNCTION CODES   |
 # | 000001 -------- ADD | 
 # | 000010 --- SUBTRACT |
 # | 000011 --- MULTIPLY |
@@ -43,14 +46,27 @@ class binary_reader:
             self.func = seq[26:31]
 
         # Arithmetic operations
-        if self.opcode == "000001":
-            return self.apu.add(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
-        elif self.opcode == "000010":
-            return self.apu.subtract(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+        if self.opcode == "0000000":
+            if self.func == "000001":
+                return self.apu.add(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+            elif self.func == "000010":
+                return self.apu.subtract(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+            elif self.func == "000011":
+                return self.apu.multiply(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+            elif self.func == "000100":
+                return self.apu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+            else:
+                print("Invalid input")
+                return
         elif self.opcode == "000011":
-            return self.apu.multiply(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
-        elif self.opcode == "000100":
-            return self.apu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+            if self.func == "000101":
+                return self.register.load(int(self.destination_reg, 2))
+            elif self.func == "000110":
+                self.register.store(int(self.num1_reg, 2), int(self.destination_reg, 2))
+                print(f"Value {int(self.num1_reg, 2)} stored in register {int(self.destination_reg, 2)}.")
+            else:
+                print("Invalid input")
+                return
         else:
-            print("Invalid input")
+            print("Invalid opcode")
             return
