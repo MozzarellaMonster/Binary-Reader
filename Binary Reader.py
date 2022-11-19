@@ -44,13 +44,13 @@ class binary_reader:
 
         # Arithmetic operations
         if self.opcode == "000001":
-            return self.apu.add(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
+            return self.apu.add(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
         elif self.opcode == "000010":
-            return self.apu.subtract(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
+            return self.apu.subtract(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
         elif self.opcode == "000011":
-            return self.apu.multiply(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
+            return self.apu.multiply(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
         elif self.opcode == "000100":
-            return self.apu.divide(self.register.load(int(self.num1_reg)), self.register.load(int(self.num2_reg)))
+            return self.apu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
         else:
             print("Invalid input")
             return
