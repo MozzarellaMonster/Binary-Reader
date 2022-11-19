@@ -35,7 +35,7 @@ class binary_reader:
 
     def read(self, seq):
         if len(seq) != 32:
-            print("Invalid input")
+            print("Invalid input, not 32-bit length.")
             return
         else:
             self.opcode = seq[:6]
@@ -56,7 +56,7 @@ class binary_reader:
             elif self.func == "000100":
                 return self.alu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
             else:
-                print("Invalid input")
+                print("Invalid input, unrecognized function code.")
                 return
         elif self.opcode == "000011":
             if self.func == "000101":
@@ -65,8 +65,8 @@ class binary_reader:
                 self.register.store(int(self.num1_reg, 2), int(self.destination_reg, 2))
                 print(f"Value {int(self.num1_reg, 2)} stored in register {int(self.destination_reg, 2)}.")
             else:
-                print("Invalid input")
+                print("Invalid input, unrecognized function code.")
                 return
         else:
-            print("Invalid opcode")
+            print("Invalid input, unrecognized operation code.")
             return
