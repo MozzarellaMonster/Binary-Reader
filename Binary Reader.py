@@ -1,6 +1,6 @@
 # Codecademy Computer Architecture Portfolio Project
 # by MozzarellaMonster
-from APU import apu
+from ALU import alu
 from Registers import registers
 
 # OPCODES and FUNCTION CODES are loosely based on MIPS R-type
@@ -29,7 +29,7 @@ class binary_reader:
         self.destination_reg = ""
         self.bit_shift = ""
         self.func = ""
-        self.apu = apu()
+        self.alu = alu()
         self.register = registers()
         
 
@@ -48,13 +48,13 @@ class binary_reader:
         # Arithmetic operations
         if self.opcode == "0000000":
             if self.func == "000001":
-                return self.apu.add(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                return self.alu.add(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
             elif self.func == "000010":
-                return self.apu.subtract(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                return self.alu.subtract(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
             elif self.func == "000011":
-                return self.apu.multiply(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                return self.alu.multiply(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
             elif self.func == "000100":
-                return self.apu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                return self.alu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
             else:
                 print("Invalid input")
                 return
