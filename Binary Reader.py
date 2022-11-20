@@ -5,13 +5,13 @@ from Registers import registers
 
 # OPCODES and FUNCTION CODES are loosely based on MIPS R-type
 
-# |---------------------|
+#  _____________________
 # |       OPCODES       |
 # | 000000 - ARITHMETIC |
 # | 000011 ------ OTHER |
-# |---------------------|
+# |_____________________|
 
-# |---------------------|
+#  _____________________
 # |    FUNCTION CODES   |
 # | 000001 -------- ADD | 
 # | 000010 --- SUBTRACT |
@@ -19,7 +19,7 @@ from Registers import registers
 # | 000100 ----- DIVIDE |
 # | 000101 ------- LOAD |
 # | 000110 ------ STORE |
-# |---------------------|
+# |_____________________|
 
 class binary_reader:
     def __init__(self):
