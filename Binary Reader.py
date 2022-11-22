@@ -48,21 +48,30 @@ class binary_reader:
         # Arithmetic operations
         if self.opcode == "0000000":
             if self.func == "000001":
-                return self.alu.add(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                result = self.alu.add(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
+                self.register.store(result, self.destination_reg)
+                return result
             elif self.func == "000010":
-                return self.alu.subtract(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                result = self.alu.subtract(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
+                self.register.store(result, self.destination_reg)
+                return result
             elif self.func == "000011":
-                return self.alu.multiply(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                result = self.alu.multiply(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
+                self.register.store(result, self.destination_reg)
+                return result
             elif self.func == "000100":
-                return self.alu.divide(self.register.load(int(self.num1_reg, 2)), self.register.load(int(self.num2_reg, 2)))
+                result = self.alu.divide(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
+                self.register.store(result, self.destination_reg)
+                return result
             else:
                 print("Invalid input, unrecognized function code.")
                 return
+        # Load and store operations
         elif self.opcode == "000011":
             if self.func == "000101":
-                return self.register.load(int(self.destination_reg, 2))
+                return self.register.load(self.destination_reg)
             elif self.func == "000110":
-                self.register.store(int(self.num1_reg, 2), int(self.destination_reg, 2))
+                self.register.store(self.num1_reg, self.destination_reg)
                 print(f"Value {int(self.num1_reg, 2)} stored in register {int(self.destination_reg, 2)}.")
             else:
                 print("Invalid input, unrecognized function code.")
@@ -70,3 +79,5 @@ class binary_reader:
         else:
             print("Invalid input, unrecognized operation code.")
             return
+
+bin_reader = binary_reader()
