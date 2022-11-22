@@ -1,5 +1,6 @@
 # Codecademy Computer Architecture Portfolio Project
 # by MozzarellaMonster
+import string
 from ALU import alu
 from Registers import registers
 
@@ -37,32 +38,35 @@ class binary_reader:
         if len(seq) != 32:
             print("Invalid input, not 32-bit length.")
             return
+        elif len(set(c for c in seq)) > 2 or set(c for c in seq) != {'0', '1'}:
+            print("Invalid input, not binary.")
+            return
         else:
             self.opcode = seq[:6]
             self.num1_reg = seq[6:11]
             self.num2_reg = seq[11:16]
             self.destination_reg = seq[16:21]
             self.bit_shift = seq[21:26]
-            self.func = seq[26:31]
+            self.func = seq[26:]
 
         # Arithmetic operations
-        if self.opcode == "0000000":
+        if self.opcode == "000000":
             if self.func == "000001":
                 result = self.alu.add(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(result, self.destination_reg)
-                return result
+                self.register.store(f'{result:06b}', self.destination_reg)
+                print(result)
             elif self.func == "000010":
                 result = self.alu.subtract(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(result, self.destination_reg)
-                return result
+                self.register.store(f'{result:06b}', self.destination_reg)
+                print(result)
             elif self.func == "000011":
                 result = self.alu.multiply(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(result, self.destination_reg)
-                return result
+                self.register.store(f'{result:06b}', self.destination_reg)
+                print(result)
             elif self.func == "000100":
                 result = self.alu.divide(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(result, self.destination_reg)
-                return result
+                self.register.store(f'{result:06b}', self.destination_reg)
+                print(result)
             else:
                 print("Invalid input, unrecognized function code.")
                 return
@@ -81,3 +85,7 @@ class binary_reader:
             return
 
 bin_reader = binary_reader()
+bin_reader.read("00001100101000000000100000000110")
+bin_reader.read("00001100011000000001000000000110")
+bin_reader.read("00000000001000010010000000000011")
+bin_reader.read("00000000001000100010100000000011")
