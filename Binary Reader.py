@@ -53,19 +53,19 @@ class binary_reader:
         if self.opcode == "000000":
             if self.func == "000001":
                 result = self.alu.add(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(f'{result:06b}', self.destination_reg)
+                self.register.store(f'{result:05b}', self.destination_reg)
                 print(result)
             elif self.func == "000010":
                 result = self.alu.subtract(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(f'{result:06b}', self.destination_reg)
+                self.register.store(f'{result:05b}', self.destination_reg)
                 print(result)
             elif self.func == "000011":
                 result = self.alu.multiply(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(f'{result:06b}', self.destination_reg)
+                self.register.store(f'{result:05b}', self.destination_reg)
                 print(result)
             elif self.func == "000100":
                 result = self.alu.divide(self.register.load(self.num1_reg), self.register.load(self.num2_reg))
-                self.register.store(f'{result:06b}', self.destination_reg)
+                self.register.store(f'{result:05b}', self.destination_reg)
                 print(result)
             else:
                 print("Invalid input, unrecognized function code.")
@@ -76,7 +76,6 @@ class binary_reader:
                 return self.register.load(self.destination_reg)
             elif self.func == "000110":
                 self.register.store(self.num1_reg, self.destination_reg)
-                print(f"Value {int(self.num1_reg, 2)} stored in register {int(self.destination_reg, 2)}.")
             else:
                 print("Invalid input, unrecognized function code.")
                 return
@@ -89,3 +88,6 @@ bin_reader.read("00001100101000000000100000000110")
 bin_reader.read("00001100011000000001000000000110")
 bin_reader.read("00000000001000010010000000000011")
 bin_reader.read("00000000001000100010100000000011")
+bin_reader.read("00000000100000010011000000000100")
+bin_reader.read("00000000001000100001100000000001")
+bin_reader.read("00000000101000110011100000000010")
