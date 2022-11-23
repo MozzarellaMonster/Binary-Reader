@@ -17,15 +17,15 @@ class registers:
     def store_oldest(self, value):
         print("store_oldest() called")
         if None in self.reg:
-            self.reg[self.reg.index(None)] = int(value, 2)
             reg_used = self.reg.index(None)
+            self.reg[reg_used] = int(value, 2)
         else:
             if self.count > 31:
                 self.count = 1
             self.reg[self.count] = int(value, 2)
-            reg_used = self.reg[self.count]
+            reg_used = self.count
             self.count += 1
-        print(f"Value {value} stored in register {reg_used}.")
+        print(f"Value {int(value, 2)} stored in register {reg_used}.")
 
     def load(self, index):
         number = self.reg[int(index, 2)]
