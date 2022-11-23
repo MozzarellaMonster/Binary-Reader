@@ -38,7 +38,7 @@ class binary_reader:
         if len(seq) != 32:
             print("Invalid input, not 32-bit length.")
             return
-        elif len(set(c for c in seq)) > 2 or set(c for c in seq) != {'0', '1'}:
+        elif set(c for c in seq) != {'0', '1'}:
             print("Invalid input, not binary.")
             return
         else:
@@ -91,3 +91,8 @@ bin_reader.read("00000000001000100010100000000011")
 bin_reader.read("00000000100000010011000000000100")
 bin_reader.read("00000000001000100001100000000001")
 bin_reader.read("00000000101000110011100000000010")
+bin_reader.read("28190839402905290432984920384290")
+bin_reader.read("00101010101111110010110111110102")
+bin_reader.read("                                ")
+bin_reader.read("fjdsklfjodskjfioofioewjdfoijiods")
+bin_reader.read("10110000110011110100110101000111100100")
