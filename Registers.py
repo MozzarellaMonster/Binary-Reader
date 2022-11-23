@@ -24,7 +24,8 @@ class registers:
             self.count += 1
 
     def load(self, index):
+        print(f"Retrieved {self.reg[int(index, 2)]} from register {int(index, 2)}.")
         return self.reg[int(index, 2)]
     
     def reset(self, index):
-        self.reg[int(index, 2)] = 0
+        self.reg[int(index, 2)] = None
