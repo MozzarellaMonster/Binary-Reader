@@ -1,6 +1,5 @@
 # Codecademy Computer Architecture Portfolio Project
 # by MozzarellaMonster
-import string
 from ALU import alu
 from Registers import registers
 
