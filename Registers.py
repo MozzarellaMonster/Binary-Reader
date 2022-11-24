@@ -34,5 +34,3 @@ class registers:
         print(f"Retrieved {number} from register {int(index, 2)}.")
         return number
     
-    def reset(self, index):
-        self.reg[int(index, 2)] = None
